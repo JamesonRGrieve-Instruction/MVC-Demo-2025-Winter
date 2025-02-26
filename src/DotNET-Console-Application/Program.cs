@@ -6,7 +6,7 @@ class Program
     {
         Person person = new Person("Bob", "Smith");
         Console.WriteLine($"{person.FirstName} {person.LastName}");
-        person.FirstName = "Jane";
+        person.FirstName = "        Jane  ";
         Console.WriteLine($"{person.FirstName} {person.LastName}");
     }
 }

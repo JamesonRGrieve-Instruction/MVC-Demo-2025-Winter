@@ -12,7 +12,18 @@ class Person
         FirstName = firstName;
         LastName = lastName;
     }
-    public string FirstName { get; set; }
+    private string _firstName;
+    public string FirstName
+    {
+        get
+        {
+            return _firstName.ToUpper();
+        }
+        set
+        {
+            _firstName = value.Trim();
+        }
+    }
     public string LastName { get; set; }
 
 }

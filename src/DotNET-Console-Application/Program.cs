@@ -9,5 +9,8 @@ class Program
         person.FirstName = "        Jane  ";
         Console.WriteLine($"{person.FirstName} {person.LastName}");
         Console.WriteLine(person.FullName);
+        Console.WriteLine(person.HungerLevel);
+        person.Eat(12f);
+        Console.WriteLine(person.HungerLevel);
     }
 }

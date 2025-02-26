@@ -2,13 +2,13 @@ namespace DotNET_Console_Application;
 
 class Person
 {
-    public Person()
-    {
-        FirstName = "John";
-        LastName = "Doe";
-        HungerLevel = 50f;
-    }
-    public Person(string firstName, string lastName)
+    // public Person()
+    // {
+    //     FirstName = "John";
+    //     LastName = "Doe";
+    //     HungerLevel = 50f;
+    // }
+    public Person(string firstName = "John", string lastName = "Doe")
     {
         FirstName = firstName;
         LastName = lastName;

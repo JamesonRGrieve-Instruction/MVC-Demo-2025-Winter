@@ -4,7 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Person person = new Person("Bob", "Smith");
+        Person person = new Person(lastName: "Shmoe");
         Console.WriteLine($"{person.FirstName} {person.LastName}");
         person.FirstName = "        Jane  ";
         Console.WriteLine($"{person.FirstName} {person.LastName}");

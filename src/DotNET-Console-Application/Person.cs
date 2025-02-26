@@ -12,7 +12,7 @@ class Person
         FirstName = firstName;
         LastName = lastName;
     }
-    private string _firstName;
+    private string _firstName = "";
     public string FirstName
     {
         get

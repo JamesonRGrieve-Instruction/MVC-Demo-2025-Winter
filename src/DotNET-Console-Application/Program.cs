@@ -8,5 +8,6 @@ class Program
         Console.WriteLine($"{person.FirstName} {person.LastName}");
         person.FirstName = "        Jane  ";
         Console.WriteLine($"{person.FirstName} {person.LastName}");
+        Console.WriteLine(person.FullName);
     }
 }

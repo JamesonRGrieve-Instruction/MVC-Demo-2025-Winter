@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SOLUTION: src/DemoSolution.sln
-      PROJECT: DotNET-Console-Application
+      PROJECT: src/DotNET-Console-Application
     strategy:
       matrix:
         dotnet-version: ["9.0.x"]

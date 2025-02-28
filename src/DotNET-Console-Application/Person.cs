@@ -2,34 +2,34 @@ namespace DotNET_Console_Application;
 
 class Pen
 {
-    public Pen(string brand = "Bic", string colour = "Black")
+    public Pen(string brand = "Bic", string colour = "Black", float inkLevelML = 50f)
     {
         Brand = brand;
         Colour = colour;
-        InkLevel = 100f;
+        _inkLevelMLMax = inkLevelML;
+        InkLevelML = inkLevelML;
     }
     public string Brand
     {
         get;
-
         set;
-
     }
     public string Colour { get; set; }
-    private float _inkLevel = 0;
-    public float InkLevel
+    private float _inkLevelML = 0;
+    private float _inkLevelMLMax = 0;
+    public float InkLevelML
     {
         get
         {
-            return _inkLevel;
+            return _inkLevelML;
         }
         set
         {
-            if (value < 0 || value > 100)
+            if (value < 0 || value > _inkLevelMLMax)
             {
-                throw new ArgumentOutOfRangeException("value", "Ink level must be between 0 and 100");
+                throw new ArgumentOutOfRangeException("value", $"Ink level must be between 0 and the maximum ink level {_inkLevelMLMax}mL.");
             }
-            _inkLevel = value;
+            _inkLevelML = value;
         }
 
     }
@@ -37,7 +37,7 @@ class Pen
     {
         try
         {
-            InkLevel -= letters * 0.5f;
+            InkLevelML -= letters * 0.1f;
         }
         catch (Exception ex)
         {

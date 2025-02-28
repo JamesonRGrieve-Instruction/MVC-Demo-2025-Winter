@@ -8,6 +8,6 @@ class Program
         pen.Write(100);
         pen.Write(42);
         pen.Write(200);
-        Console.WriteLine($"{pen.InkLevel:0.00}% Ink Remaining");
+        Console.WriteLine($"{pen.InkLevelML:0.00}mL Ink Remaining");
     }
 }

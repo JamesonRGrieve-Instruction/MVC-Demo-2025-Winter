@@ -34,14 +34,7 @@ public class Pen
     }
     public void Write(int letters)
     {
-        try
-        {
-            InkLevelML -= letters * 0.1f;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message.ToString());
-        }
+        InkLevelML -= letters * 0.1f;
     }
     // public string FullName => Brand + " " + Colour.ToUpper();
 

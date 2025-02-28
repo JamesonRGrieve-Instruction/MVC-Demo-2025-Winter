@@ -30,6 +30,12 @@ jobs:
       - name: Build
         run: dotnet build --no-restore ${{env.SOLUTION}}
 
+      - name: PWD
+        run: pwd
+
+      - name: LS
+        run: ls -a
+
       - name: Check Build
         run: |
           if [ ! -d "${{env.PROJECT}}/bin" ] && [ ! -d "${{env.PROJECT}}/publish" ]; then

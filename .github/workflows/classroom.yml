@@ -24,7 +24,7 @@ jobs:
           dotnet-version: ${{ matrix.dotnet-version }}
 
       - name: Restore dependencies
-        run: cd src && dotnet restore 2025-Winter-CSharp-2-Demo/${{env.SOLUTION}}
+        run: dotnet restore ${{env.SOLUTION}}
 
       - name: Build
         run: dotnet build --no-restore ${{env.SOLUTION}}

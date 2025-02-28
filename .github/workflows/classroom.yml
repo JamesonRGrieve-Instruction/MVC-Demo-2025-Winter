@@ -13,7 +13,7 @@ jobs:
       SOLUTION: src/DemoSolution.sln
     strategy:
       matrix:
-        dotnet-version: ["8.0.x"]
+        dotnet-version: ["9.0.x"]
 
     steps:
       - uses: actions/checkout@v3

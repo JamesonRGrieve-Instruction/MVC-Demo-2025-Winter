@@ -3,7 +3,7 @@
 public class Pen_Tests
 {
     [Fact]
-    public void Test()
+    public void Test_Fact()
     {
         // Arrange Default
         Pen pen = new Pen();
@@ -51,5 +51,17 @@ public class Pen_Tests
 
         pen.Write(100);
         Assert.Equal(50f, pen.InkLevelML);
+    }
+    [Theory,
+        InlineData("Bic", "Black", 50f),
+        InlineData("Paper Mate", "Red", 60f),
+        InlineData("Pilot", "Blue", 65f)
+        ]
+    public void Test_Theory_Constructor_Params(string brand, string colour, float inkLevelML)
+    {
+        Pen pen = new Pen(brand, colour, inkLevelML);
+        Assert.Equal(brand, pen.Brand);
+        Assert.Equal(colour, pen.Colour);
+        Assert.Equal(inkLevelML, pen.InkLevelML);
     }
 }

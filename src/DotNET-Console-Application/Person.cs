@@ -1,53 +1,49 @@
 namespace DotNET_Console_Application;
 
-class Person
+class Pen
 {
-    // public Person()
-    // {
-    //     FirstName = "John";
-    //     LastName = "Doe";
-    //     HungerLevel = 50f;
-    // }
-    public Person(string firstName = "John", string lastName = "Doe")
+    public Pen(string brand = "Bic", string colour = "Black")
     {
-        FirstName = firstName;
-        LastName = lastName;
-        HungerLevel = 50f;
+        Brand = brand;
+        Colour = colour;
+        InkLevel = 100f;
     }
-    private string _firstName = "";
-    public string FirstName
+    public string Brand
+    {
+        get;
+
+        set;
+
+    }
+    public string Colour { get; set; }
+    private float _inkLevel = 0;
+    public float InkLevel
     {
         get
         {
-            return _firstName.ToUpper();
+            return _inkLevel;
         }
         set
         {
-            _firstName = value.Trim();
-        }
-    }
-    public string LastName { get; set; }
-    private float _hungerLevel = 0;
-    public float HungerLevel
-    {
-        get
-        {
-            return _hungerLevel;
-        }
-        set
-        {
-            if (_hungerLevel < 0 || _hungerLevel > 100)
+            if (value < 0 || value > 100)
             {
-                throw new ArgumentOutOfRangeException("value", "Hunger level must be between 0 and 100");
+                throw new ArgumentOutOfRangeException("value", "Ink level must be between 0 and 100");
             }
-            _hungerLevel = value;
+            _inkLevel = value;
         }
 
     }
-    public void Eat(float amount)
+    public void Write(int letters)
     {
-        HungerLevel -= amount;
+        try
+        {
+            InkLevel -= letters * 0.5f;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message.ToString());
+        }
     }
-    public string FullName => FirstName + " " + LastName.ToUpper();
+    // public string FullName => Brand + " " + Colour.ToUpper();
 
 }

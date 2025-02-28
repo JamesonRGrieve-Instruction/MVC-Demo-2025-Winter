@@ -14,7 +14,7 @@ jobs:
       PROJECT: src/DotNET-Console-Application
     strategy:
       matrix:
-        dotnet-version: ["9.0.x"]
+        dotnet-version: ["7.0.x", "8.0.x", "9.0.x", "10.0.x"]
 
     steps:
       - uses: actions/checkout@v3
@@ -29,12 +29,6 @@ jobs:
 
       - name: Build
         run: dotnet build --no-restore ${{env.SOLUTION}}
-
-      - name: PWD
-        run: pwd
-
-      - name: LS
-        run: ls -a
 
       - name: Check Build
         run: |

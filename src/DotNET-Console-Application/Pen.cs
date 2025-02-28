@@ -1,6 +1,6 @@
 namespace DotNET_Console_Application;
 
-class Pen
+public class Pen
 {
     public Pen(string brand = "Bic", string colour = "Black", float inkLevelML = 50f)
     {
@@ -31,7 +31,6 @@ class Pen
             }
             _inkLevelML = value;
         }
-
     }
     public void Write(int letters)
     {

@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SOLUTION: src/DemoSolution.sln
+      PROJECT: DotNET-Console-Application
     strategy:
       matrix:
         dotnet-version: ["9.0.x"]
@@ -29,12 +30,12 @@ jobs:
       - name: Build
         run: dotnet build --no-restore ${{env.SOLUTION}}
 
-      - name: Test
-        run: dotnet test --no-restore ${{env.SOLUTION}}
-
-      - name: Check build artifacts
+      - name: Check Build
         run: |
-          if [ ! -d "bin" ] && [ ! -d "publish" ]; then
+          if [ ! -d "${{env.PROJECT}}/bin" ] && [ ! -d "${{env.PROJECT}}/publish" ]; then
             echo "No build output directory found. Expected 'bin' or 'publish'."
             exit 1
           fi
+
+      - name: Test
+        run: dotnet test --no-restore ${{env.SOLUTION}}

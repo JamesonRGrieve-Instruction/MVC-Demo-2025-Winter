@@ -1,23 +1,17 @@
 namespace DotNET_Console_Application;
 
-public class Pen
+public class Pen : WritingUtensil
 {
-    public Pen(string brand = "Bic", string colour = "Black", float inkLevelML = 50f)
+    public Pen(string brand = "Bic", string colour = "Black", double inkLevelML = 50) : base(brand)
     {
-        Brand = brand;
         Colour = colour;
         _inkLevelMLMax = inkLevelML;
         InkLevelML = inkLevelML;
     }
-    public string Brand
-    {
-        get;
-        set;
-    }
     public string Colour { get; set; }
-    private float _inkLevelML = 0;
-    private float _inkLevelMLMax = 0;
-    public float InkLevelML
+    private double _inkLevelML = 0;
+    private double _inkLevelMLMax = 0;
+    public double InkLevelML
     {
         get
         {
@@ -32,10 +26,13 @@ public class Pen
             _inkLevelML = value;
         }
     }
-    public void Write(int letters)
+    public override void Write(int letters)
     {
-        InkLevelML -= letters * 0.1f;
+        InkLevelML -= letters * 0.1;
     }
-    // public string FullName => Brand + " " + Colour.ToUpper();
+    public override string ToString()
+    {
+        return $"A {Colour} {Brand} pen with {InkLevelML:0.00}mL ink remaining.";
+    }
 
 }

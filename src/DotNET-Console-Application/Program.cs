@@ -4,10 +4,36 @@ class Program
 {
     static void Main(string[] args)
     {
-        Pen pen = new Pen();
-        pen.Write(100);
-        pen.Write(42);
-        pen.Write(200);
-        Console.WriteLine($"{pen.InkLevelML:0.00}mL Ink Remaining");
+        Console.Write("Do you want to use a pen or pencil?: ");
+        string answer = Console.ReadLine().Trim().ToLower();
+        if (answer == "pen" || answer == "pencil")
+        {
+            WritingUtensil writingUtensil = answer == "pen" ? new Pen() : new Pencil();
+            while (answer != "exit")
+            {
+                try
+                {
+                    Console.Write("How many letters would you like to write?: ");
+                    answer = Console.ReadLine().Trim();
+                    if (answer != "exit")
+                    {
+                        int letters = int.Parse(answer);
+                        writingUtensil.Write(letters);
+                        Console.WriteLine(writingUtensil);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+            }
+        }
+        else
+        {
+            Console.WriteLine("How do I write with that?");
+        }
+
+
     }
 }

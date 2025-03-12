@@ -6,19 +6,19 @@ class Program
 {
     static void Main(string[] args)
     {
-        for (int i = 1; i <= 10; i++)
-        {
-            Console.WriteLine(i);
-        }
+        string userName = Environment.UserName;
+        string machineName = Environment.MachineName;
+        string osVersion = Environment.OSVersion.ToString();
+        string userFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        string documentsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-        Count(1, 10);
+        Console.WriteLine($"User Name: {userName}");
+        Console.WriteLine($"Machine Name: {machineName}");
+        Console.WriteLine($"Operating System: {osVersion}");
+        Console.WriteLine($"User Folder: {userFolder}");
+        Console.WriteLine($"Documents Folder: {documentsFolder}");
+
+
     }
-    static void Count(int from, int to)
-    {
-        Console.WriteLine(from);
-        if (from < to)
-        {
-            Count(from + 1, to);
-        }
-    }
+
 }

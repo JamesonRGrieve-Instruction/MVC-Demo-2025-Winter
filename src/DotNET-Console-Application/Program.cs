@@ -4,24 +4,21 @@
 
 class Program
 {
-    static readonly HttpClient client = new HttpClient();
-    static async Task Main(string[] args)
+    static void Main(string[] args)
     {
-        try
+        for (int i = 1; i <= 10; i++)
         {
-            HttpResponseMessage response = await client.GetAsync("https://randomuser.me/lakjshgdsak/");
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(responseBody);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
+            Console.WriteLine(i);
         }
 
-
-
-
+        Count(1, 10);
     }
-
+    static void Count(int from, int to)
+    {
+        Console.WriteLine(from);
+        if (from < to)
+        {
+            Count(from + 1, to);
+        }
+    }
 }

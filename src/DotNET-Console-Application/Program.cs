@@ -2,38 +2,21 @@
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
-        Console.Write("Do you want to use a pen or pencil?: ");
-        string answer = Console.ReadLine().Trim().ToLower();
-        if (answer == "pen" || answer == "pencil")
-        {
-            WritingUtensil writingUtensil = answer == "pen" ? new Pen() : new Pencil();
-            while (answer != "exit")
-            {
-                try
-                {
-                    Console.Write("How many letters would you like to write?: ");
-                    answer = Console.ReadLine().Trim();
-                    if (answer != "exit")
-                    {
-                        int letters = int.Parse(answer);
-                        writingUtensil.Write(letters);
-                        Console.WriteLine(writingUtensil);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-
-            }
-        }
-        else
-        {
-            Console.WriteLine("How do I write with that?");
-        }
-
-
+        Task<int> result1 = PerformCalculationAsync(2);
+        Task<int> result2 = PerformCalculationAsync(5);
+        Task<int> result3 = PerformCalculationAsync(3);
+        await Task.WhenAll(result1, result2, result3);
+        Console.WriteLine($"{result1.Result} {result2.Result} {result3.Result}");
     }
+
+    static async Task<int> PerformCalculationAsync(int seconds)
+    {
+        Console.WriteLine($"Performing calculation taking {seconds}s.");
+        await Task.Delay(seconds * 1000); // Simulate long running task
+        Console.WriteLine($"Performed calculation after {seconds}s.");
+        return 42; // Return some result
+    }
+
 }

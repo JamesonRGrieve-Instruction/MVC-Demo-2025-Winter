@@ -14,29 +14,27 @@ namespace DotNET_Console_Application.Migrations
                 name: "course_id",
                 table: "student",
                 type: "INTEGER",
-                nullable: false,
-                defaultValue: 0);
+                nullable: true);
 
             migrationBuilder.AddColumn<int>(
                 name: "instructor_id",
                 table: "course",
                 type: "INTEGER",
-                nullable: false,
-                defaultValue: 0);
+                nullable: true);
 
             migrationBuilder.UpdateData(
                 table: "course",
                 keyColumn: "id",
                 keyValue: -2,
                 column: "instructor_id",
-                value: 0);
+                value: null);
 
             migrationBuilder.UpdateData(
                 table: "course",
                 keyColumn: "id",
                 keyValue: -1,
                 column: "instructor_id",
-                value: 0);
+                value: null);
 
             migrationBuilder.CreateIndex(
                 name: "FK_Student_Course",

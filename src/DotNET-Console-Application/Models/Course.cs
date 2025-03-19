@@ -15,7 +15,7 @@ namespace DotNET_Console_Application.Models
         public string Name { get; set; }
 
         [Column("instructor_id", TypeName = "INTEGER")]
-        public int InstructorID { get; set; }
+        public int? InstructorID { get; set; }
 
         [ForeignKey(nameof(InstructorID))]
         [InverseProperty(nameof(Models.Instructor.Courses))]

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotNET_Console_Application.Migrations
 {
     [DbContext(typeof(CodeFirstContext))]
-    [Migration("20250319014137_ForeignKeys")]
+    [Migration("20250319014412_ForeignKeys")]
     partial class ForeignKeys
     {
         /// <inheritdoc />
@@ -30,7 +30,7 @@ namespace DotNET_Console_Application.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("code");
 
-                    b.Property<int>("InstructorID")
+                    b.Property<int?>("InstructorID")
                         .HasColumnType("INTEGER")
                         .HasColumnName("instructor_id");
 
@@ -51,14 +51,12 @@ namespace DotNET_Console_Application.Migrations
                         {
                             ID = -1,
                             Code = "COMP101",
-                            InstructorID = 0,
                             Name = "Introduction to Programming"
                         },
                         new
                         {
                             ID = -2,
                             Code = "DATA101",
-                            InstructorID = 0,
                             Name = "Introduction to Databases"
                         });
                 });
@@ -92,7 +90,7 @@ namespace DotNET_Console_Application.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
-                    b.Property<int>("CourseID")
+                    b.Property<int?>("CourseID")
                         .HasColumnType("INTEGER")
                         .HasColumnName("course_id");
 
@@ -120,7 +118,6 @@ namespace DotNET_Console_Application.Migrations
                         .WithMany("Courses")
                         .HasForeignKey("InstructorID")
                         .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired()
                         .HasConstraintName("FK_Course_Instructor");
 
                     b.Navigation("Instructor");
@@ -132,7 +129,6 @@ namespace DotNET_Console_Application.Migrations
                         .WithMany("Students")
                         .HasForeignKey("CourseID")
                         .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired()
                         .HasConstraintName("FK_Student_Course");
 
                     b.Navigation("Course");

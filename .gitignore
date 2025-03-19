@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/linux,windows,macos,dotnetcore
 # Edit at https://www.toptal.com/developers/gitignore?templates=linux,windows,macos,dotnetcore
 
+*.db*
+
 ### DotnetCore ###
 # .NET Core build folders
 bin/

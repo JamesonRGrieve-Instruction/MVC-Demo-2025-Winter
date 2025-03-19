@@ -11,6 +11,13 @@ namespace DotNET_Console_Application.Models
         [Column("id", TypeName = "INTEGER")]
         public int ID { get; set; }
 
+        [Required]
+        [Column("first_name", TypeName = "TEXT")]
+        public string FirstName { get; set; }
+        [Required]
+        [Column("last_name", TypeName = "TEXT")]
+        public string LastName { get; set; }
+
     }
 }
 

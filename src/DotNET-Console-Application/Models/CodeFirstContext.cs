@@ -20,7 +20,20 @@ public partial class CodeFirstContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Course>();
+        modelBuilder.Entity<Course>(entity =>
+        {
+            entity.HasData([new Course()
+            {
+                ID = -1,
+                Name = "Introduction to Programming",
+                Code = "COMP101"
+            }, new Course()
+            {
+                ID = -2,
+                Name = "Introduction to Databases",
+                Code = "DATA101"
+            }]);
+        });
         modelBuilder.Entity<Student>();
         modelBuilder.Entity<Instructor>();
         OnModelCreatingPartial(modelBuilder);

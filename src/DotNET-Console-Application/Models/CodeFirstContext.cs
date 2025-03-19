@@ -1,64 +1,32 @@
-using DotNET_Console_Application.Models;
 using Microsoft.EntityFrameworkCore;
 
-public partial class CodeFirstContext : DbContext
+namespace DotNET_Console_Application.Models
 {
-    public CodeFirstContext() { }
-    public CodeFirstContext(DbContextOptions options) : base(options) { }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public partial class CodeFirstContext : DbContext
     {
-        base.OnConfiguring(optionsBuilder);
-        if (!optionsBuilder.IsConfigured)
+        public CodeFirstContext() { }
+        public CodeFirstContext(DbContextOptions options) : base(options) { }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=CodeFirst.db");
+            base.OnConfiguring(optionsBuilder);
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite("Data Source=CodeFirst.db");
+            }
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Call other partial OnModelCreating methods
+            OnModelCreatingPartialCourse(modelBuilder);
+            OnModelCreatingPartialInstructor(modelBuilder);
+            OnModelCreatingPartialStudent(modelBuilder);
+        }
+
+        partial void OnModelCreatingPartialCourse(ModelBuilder modelBuilder);
+        partial void OnModelCreatingPartialInstructor(ModelBuilder modelBuilder);
+        partial void OnModelCreatingPartialStudent(ModelBuilder modelBuilder);
     }
-    public DbSet<Student> Students { get; }
-    public DbSet<Course> Courses { get; }
-    public DbSet<Instructor> Instructors { get; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Instructor>(entity =>
-        {
-            entity.HasData([new Instructor() {
-                ID = -1,
-                FirstName = "John",
-                LastName = "Doe"
-            }]);
-        });
-        modelBuilder.Entity<Course>(entity =>
-        {
-            // Define seed data for testing or system functionality.
-            entity.HasData([new Course()
-            {
-                ID = -1,
-                Name = "Introduction to Programming",
-                Code = "COMP101",
-                InstructorID = -1
-            }, new Course()
-            {
-                ID = -2,
-                Name = "Introduction to Databases",
-                Code = "DATA101",
-                InstructorID = -1
-            }]);
-            // Define the context of the relationship between this entity and the child entity.
-            entity.HasOne(child => child.Instructor).WithMany(parent => parent.Courses).OnDelete(DeleteBehavior.SetNull).HasConstraintName($"FK_{nameof(Course)}_{nameof(Instructor)}");
-            // Define the index for the above relationship.
-            entity.HasIndex(e => e.InstructorID).HasDatabaseName($"FK_{nameof(Course)}_{nameof(Instructor)}");
-        });
-
-        modelBuilder.Entity<Student>(entity =>
-        {
-            // Define the context of the relationship between this entity and the child entity.
-            entity.HasOne(child => child.Course).WithMany(parent => parent.Students).OnDelete(DeleteBehavior.SetNull).HasConstraintName($"FK_{nameof(Student)}_{nameof(Course)}");
-            // Define the index for the above relationship.
-            entity.HasIndex(e => e.CourseID).HasDatabaseName($"FK_{nameof(Student)}_{nameof(Course)}");
-        });
-
-        OnModelCreatingPartial(modelBuilder);
-    }
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

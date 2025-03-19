@@ -20,6 +20,14 @@ public partial class CodeFirstContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Instructor>(entity =>
+        {
+            entity.HasData([new Instructor() {
+                ID = -1,
+                FirstName = "John",
+                LastName = "Doe"
+            }]);
+        });
         modelBuilder.Entity<Course>(entity =>
         {
             // Define seed data for testing or system functionality.
@@ -27,12 +35,14 @@ public partial class CodeFirstContext : DbContext
             {
                 ID = -1,
                 Name = "Introduction to Programming",
-                Code = "COMP101"
+                Code = "COMP101",
+                InstructorID = -1
             }, new Course()
             {
                 ID = -2,
                 Name = "Introduction to Databases",
-                Code = "DATA101"
+                Code = "DATA101",
+                InstructorID = -1
             }]);
             // Define the context of the relationship between this entity and the child entity.
             entity.HasOne(child => child.Instructor).WithMany(parent => parent.Courses).OnDelete(DeleteBehavior.SetNull).HasConstraintName($"FK_{nameof(Course)}_{nameof(Instructor)}");
@@ -47,7 +57,7 @@ public partial class CodeFirstContext : DbContext
             // Define the index for the above relationship.
             entity.HasIndex(e => e.CourseID).HasDatabaseName($"FK_{nameof(Student)}_{nameof(Course)}");
         });
-        modelBuilder.Entity<Instructor>();
+
         OnModelCreatingPartial(modelBuilder);
     }
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

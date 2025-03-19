@@ -13,6 +13,16 @@ namespace DotNET_Console_Application.Models
         [Required]
         [Column("name", TypeName = "TEXT")]
         public string Name { get; set; }
+
+        [Column("instructor_id", TypeName = "INTEGER")]
+        public int InstructorID { get; set; }
+
+        [ForeignKey(nameof(InstructorID))]
+        [InverseProperty(nameof(Models.Instructor.Courses))]
+        public virtual Instructor Instructor { get; set; }
+
+        [InverseProperty(nameof(Models.Student.Course))]
+        public virtual IEnumerable<Student> Students { get; set; }
     }
 }
 

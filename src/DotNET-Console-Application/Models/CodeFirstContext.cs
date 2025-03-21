@@ -20,7 +20,22 @@ namespace DotNET_Console_Application.Models
             Env.Load(envPath);
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlite($"Data Source={Environment.GetEnvironmentVariable("DB_NAME")}.db");
+                if (Environment.GetEnvironmentVariable("DB_TYPE") == "sqlite")
+                {
+                    optionsBuilder.UseSqlite($"Data Source={Environment.GetEnvironmentVariable("DB_NAME")}.db");
+                }
+                else if (Environment.GetEnvironmentVariable("DB_TYPE") == "mariadb")
+                {
+                    optionsBuilder.UseMySql($"server=localhost;database={Environment.GetEnvironmentVariable("DB_NAME")};user=root;password={Environment.GetEnvironmentVariable("DB_PASSWORD")}", new MySqlServerVersion(new Version(11, 8, 1)));
+                }
+                else if (Environment.GetEnvironmentVariable("DB_TYPE") == "postgres")
+                {
+                    optionsBuilder.UseNpgsql($"Host=localhost;Port=5454;Username={Environment.GetEnvironmentVariable("DB_USER")};Password={Environment.GetEnvironmentVariable("DB_PASSWORD")};Database={Environment.GetEnvironmentVariable("DB_NAME")};");
+                }
+                else
+                {
+                    throw new Exception("Unsupported DB_TYPE.");
+                }
             }
         }
 

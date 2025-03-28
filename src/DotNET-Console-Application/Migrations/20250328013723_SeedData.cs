@@ -43,14 +43,14 @@ namespace DotNET_Console_Application.Migrations
                 columns: new[] { "vin", "colour", "model_id", "model_year" },
                 values: new object[,]
                 {
-                    { " JH4NA1153MT000743", "Silver", -3, 1991 },
-                    { " JN1RZ24A1LX002317", "Red", -7, 1990 },
-                    { " JTDFR320320052403", "Green", -6, 2002 },
+                    { "-----BCNR33004655", "Purple", -8, 1995 },
                     { "4A3AL54F3XE067712", "Red", -1, 1999 },
-                    { "BCNR33004655", "Purple", -8, 1995 },
                     { "JA3AN74K8XY001384", "Red", -2, 1999 },
+                    { "JH4NA1153MT000743", "Silver", -3, 1991 },
                     { "JHMAP21475S008443", "Steel Blue", -4, 2005 },
-                    { "JT2JA82J8S0028274", "Black", -5, 1995 }
+                    { "JN1RZ24A1LX002317", "Red", -7, 1990 },
+                    { "JT2JA82J8S0028274", "Black", -5, 1995 },
+                    { "JTDFR320320052403", "Green", -6, 2002 }
                 });
         }
 
@@ -60,17 +60,7 @@ namespace DotNET_Console_Application.Migrations
             migrationBuilder.DeleteData(
                 table: "vehicle",
                 keyColumn: "vin",
-                keyValue: " JH4NA1153MT000743");
-
-            migrationBuilder.DeleteData(
-                table: "vehicle",
-                keyColumn: "vin",
-                keyValue: " JN1RZ24A1LX002317");
-
-            migrationBuilder.DeleteData(
-                table: "vehicle",
-                keyColumn: "vin",
-                keyValue: " JTDFR320320052403");
+                keyValue: "-----BCNR33004655");
 
             migrationBuilder.DeleteData(
                 table: "vehicle",
@@ -80,12 +70,12 @@ namespace DotNET_Console_Application.Migrations
             migrationBuilder.DeleteData(
                 table: "vehicle",
                 keyColumn: "vin",
-                keyValue: "BCNR33004655");
+                keyValue: "JA3AN74K8XY001384");
 
             migrationBuilder.DeleteData(
                 table: "vehicle",
                 keyColumn: "vin",
-                keyValue: "JA3AN74K8XY001384");
+                keyValue: "JH4NA1153MT000743");
 
             migrationBuilder.DeleteData(
                 table: "vehicle",
@@ -95,7 +85,17 @@ namespace DotNET_Console_Application.Migrations
             migrationBuilder.DeleteData(
                 table: "vehicle",
                 keyColumn: "vin",
+                keyValue: "JN1RZ24A1LX002317");
+
+            migrationBuilder.DeleteData(
+                table: "vehicle",
+                keyColumn: "vin",
                 keyValue: "JT2JA82J8S0028274");
+
+            migrationBuilder.DeleteData(
+                table: "vehicle",
+                keyColumn: "vin",
+                keyValue: "JTDFR320320052403");
 
             migrationBuilder.DeleteData(
                 table: "model",

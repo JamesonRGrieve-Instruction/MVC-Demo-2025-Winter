@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -10,26 +11,32 @@ namespace DotNET_Console_Application.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateTable(
                 name: "manufacturer",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     name = table.Column<string>(type: "TEXT", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_manufacturer", x => x.id);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "model",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    name = table.Column<string>(type: "TEXT", nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    name = table.Column<string>(type: "TEXT", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     manufacturer_id = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
@@ -41,15 +48,18 @@ namespace DotNET_Console_Application.Migrations
                         principalTable: "manufacturer",
                         principalColumn: "id",
                         onDelete: ReferentialAction.SetNull);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "vehicle",
                 columns: table => new
                 {
-                    vin = table.Column<string>(type: "TEXT", nullable: false),
+                    vin = table.Column<string>(type: "CHAR(17)", maxLength: 17, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     model_year = table.Column<int>(type: "INTEGER", nullable: false),
-                    colour = table.Column<string>(type: "TEXT", nullable: false),
+                    colour = table.Column<string>(type: "TEXT", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     model_id = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
@@ -61,7 +71,8 @@ namespace DotNET_Console_Application.Migrations
                         principalTable: "model",
                         principalColumn: "id",
                         onDelete: ReferentialAction.SetNull);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
                 name: "FK_Model_Manufacturer",

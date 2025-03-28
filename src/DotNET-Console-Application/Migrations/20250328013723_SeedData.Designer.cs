@@ -2,6 +2,8 @@
 using DotNET_Console_Application.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,12 +11,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotNET_Console_Application.Migrations
 {
     [DbContext(typeof(CodeFirstContext))]
-    partial class CodeFirstContextModelSnapshot : ModelSnapshot
+    [Migration("20250328013723_SeedData")]
+    partial class SeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.3");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "9.0.3")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("DotNET_Console_Application.Models.Manufacturer", b =>
                 {
@@ -22,6 +30,8 @@ namespace DotNET_Console_Application.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
                         .HasColumnName("id");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -61,6 +71,8 @@ namespace DotNET_Console_Application.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
                         .HasColumnName("id");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<int?>("ManufacturerID")
                         .HasColumnType("INTEGER")
@@ -132,7 +144,8 @@ namespace DotNET_Console_Application.Migrations
             modelBuilder.Entity("DotNET_Console_Application.Models.Vehicle", b =>
                 {
                     b.Property<string>("VIN")
-                        .HasColumnType("TEXT")
+                        .HasMaxLength(17)
+                        .HasColumnType("CHAR(17)")
                         .HasColumnName("vin");
 
                     b.Property<string>("Colour")
@@ -172,7 +185,7 @@ namespace DotNET_Console_Application.Migrations
                         },
                         new
                         {
-                            VIN = " JH4NA1153MT000743",
+                            VIN = "JH4NA1153MT000743",
                             Colour = "Silver",
                             ModelID = -3,
                             ModelYear = 1991
@@ -193,21 +206,21 @@ namespace DotNET_Console_Application.Migrations
                         },
                         new
                         {
-                            VIN = " JTDFR320320052403",
+                            VIN = "JTDFR320320052403",
                             Colour = "Green",
                             ModelID = -6,
                             ModelYear = 2002
                         },
                         new
                         {
-                            VIN = " JN1RZ24A1LX002317",
+                            VIN = "JN1RZ24A1LX002317",
                             Colour = "Red",
                             ModelID = -7,
                             ModelYear = 1990
                         },
                         new
                         {
-                            VIN = "BCNR33004655",
+                            VIN = "-----BCNR33004655",
                             Colour = "Purple",
                             ModelID = -8,
                             ModelYear = 1995

@@ -26,11 +26,11 @@ namespace DotNET_Console_Application.Models
                 }
                 else if (Environment.GetEnvironmentVariable("DB_TYPE") == "mariadb")
                 {
-                    optionsBuilder.UseMySql($"server=localhost;database={Environment.GetEnvironmentVariable("DB_NAME")};user=root;password={Environment.GetEnvironmentVariable("DB_PASSWORD")}", new MySqlServerVersion(new Version(11, 8, 1)));
+                    optionsBuilder.UseMySql($"server=localhost;database={Environment.GetEnvironmentVariable("DB_NAME")};user={Environment.GetEnvironmentVariable("DB_USER")};password={Environment.GetEnvironmentVariable("DB_PASSWORD")}", new MySqlServerVersion(new Version(11, 8, 1)));
                 }
                 else if (Environment.GetEnvironmentVariable("DB_TYPE") == "postgres")
                 {
-                    optionsBuilder.UseNpgsql($"Host=localhost;Port=5454;Username={Environment.GetEnvironmentVariable("DB_USER")};Password={Environment.GetEnvironmentVariable("DB_PASSWORD")};Database={Environment.GetEnvironmentVariable("DB_NAME")};");
+                    optionsBuilder.UseNpgsql($"Host=localhost;Port={Environment.GetEnvironmentVariable("DB_PORT")};Username={Environment.GetEnvironmentVariable("DB_USER")};Password={Environment.GetEnvironmentVariable("DB_PASSWORD")};Database={Environment.GetEnvironmentVariable("DB_NAME")};");
                 }
                 else
                 {
@@ -42,14 +42,14 @@ namespace DotNET_Console_Application.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Call other partial OnModelCreating methods
-            OnModelCreatingPartialCourse(modelBuilder);
-            OnModelCreatingPartialInstructor(modelBuilder);
-            OnModelCreatingPartialStudent(modelBuilder);
+            OnModelCreatingPartialModel(modelBuilder);
+            OnModelCreatingPartialManufacturer(modelBuilder);
+            OnModelCreatingPartialVehicle(modelBuilder);
         }
 
-        partial void OnModelCreatingPartialCourse(ModelBuilder modelBuilder);
-        partial void OnModelCreatingPartialInstructor(ModelBuilder modelBuilder);
-        partial void OnModelCreatingPartialStudent(ModelBuilder modelBuilder);
+        partial void OnModelCreatingPartialModel(ModelBuilder modelBuilder);
+        partial void OnModelCreatingPartialManufacturer(ModelBuilder modelBuilder);
+        partial void OnModelCreatingPartialVehicle(ModelBuilder modelBuilder);
     }
 
 }

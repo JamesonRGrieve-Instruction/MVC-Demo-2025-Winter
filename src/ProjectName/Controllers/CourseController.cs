@@ -10,13 +10,13 @@ namespace ProjectName
         // GET: Coursecontroller
         public ActionResult Index()
         {
-            return View(courses);
+            return View(courses.Where(course => course.UserID == User.Identity.Name));
         }
 
         // GET: Coursecontroller/Details/5
         public ActionResult Details(string code)
         {
-            return View(courses.Find(x => x.CourseCode == code));
+            return View(courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code));
         }
 
         // GET: Coursecontroller/Create
@@ -32,6 +32,7 @@ namespace ProjectName
         {
             try
             {
+                course.UserID = User.Identity.Name;
                 courses.Add(course);
                 return RedirectToAction(nameof(Index));
             }
@@ -46,7 +47,7 @@ namespace ProjectName
         {
             try
             {
-                return View(courses.Find(x => x.CourseCode == code));
+                return View(courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code));
             }
             catch
             {
@@ -62,7 +63,7 @@ namespace ProjectName
         {
             try
             {
-                Course target = courses.Find(x => x.CourseCode == code);
+                Course target = courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code);
                 target.CourseCode = course.CourseCode;
                 target.Name = course.Name;
                 target.Description = course.Description;
@@ -79,7 +80,7 @@ namespace ProjectName
         {
             try
             {
-                return View(courses.Find(x => x.CourseCode == code));
+                return View(courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code));
             }
             catch
             {
@@ -95,7 +96,7 @@ namespace ProjectName
         {
             try
             {
-                Course target = courses.Find(x => x.CourseCode == code);
+                Course target = courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code);
                 courses.Remove(target);
                 return RedirectToAction(nameof(Index));
             }

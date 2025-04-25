@@ -1,3 +1,14 @@
+@{
+    ViewData["Title"] = "Mad Lib Input";
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
 <form method="post" action="/Home/MadLibOutput">
     <div>
         <label for="userName">Your Name:</label>

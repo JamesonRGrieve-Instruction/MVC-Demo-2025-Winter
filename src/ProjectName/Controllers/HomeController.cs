@@ -23,6 +23,11 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Input()
+    {
+        return View();
+    }
+
     public IActionResult Example()
     {
         return View();
@@ -31,6 +36,18 @@ public class HomeController : Controller
     public IActionResult OutputExample()
     {
         return View();
+    }
+
+    [HttpPost]
+    public IActionResult MadLibOutput(string userName, string townName, string foodType, string footwearType, string vehicleType, string colorName)
+    {
+        ViewData["UserName"] = userName;
+        ViewData["TownName"] = townName;
+        ViewData["FoodType"] = foodType;
+        ViewData["FootwearType"] = footwearType;
+        ViewData["VehicleType"] = vehicleType;
+        ViewData["ColorName"] = colorName;
+        return View("Output"); // Specify the Output view
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

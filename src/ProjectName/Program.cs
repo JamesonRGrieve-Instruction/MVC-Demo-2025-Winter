@@ -18,6 +18,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
+
+// Add health checks
+builder.Services.AddHealthChecks()
+    .AddDbContextCheck<ApplicationDbContext>();
+
 var config = builder.Configuration;
 builder.Services.AddAuthentication().AddGoogle(options =>
 {
@@ -43,6 +48,9 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+
+// Map health check endpoint
+app.MapHealthChecks("/health");
 
 app.MapStaticAssets();
 

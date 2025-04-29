@@ -8,17 +8,18 @@ namespace ProjectName
 
     public class CourseController : Controller
     {
-        private static List<Course> courses = new List<Course>();
+        private static CourseContext db = new CourseContext();
+
         // GET: Coursecontroller
         public ActionResult Index()
         {
-            return View(courses.Where(course => course.UserID == User.Identity.Name));
+            return View(db.Courses.Where(course => course.UserID == User.Identity.Name));
         }
 
         // GET: Coursecontroller/Details/5
         public ActionResult Details(string code)
         {
-            return View(courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code));
+            return View(db.Courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code));
         }
 
         // GET: Coursecontroller/Create
@@ -35,7 +36,8 @@ namespace ProjectName
             try
             {
                 course.UserID = User.Identity.Name;
-                courses.Add(course);
+                db.Courses.Add(course);
+                db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -49,7 +51,7 @@ namespace ProjectName
         {
             try
             {
-                return View(courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code));
+                return View(db.Courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code));
             }
             catch
             {
@@ -65,10 +67,11 @@ namespace ProjectName
         {
             try
             {
-                Course target = courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code);
+                Course target = db.Courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code);
                 target.CourseCode = course.CourseCode;
                 target.Name = course.Name;
                 target.Description = course.Description;
+                db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -82,7 +85,7 @@ namespace ProjectName
         {
             try
             {
-                return View(courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code));
+                return View(db.Courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code));
             }
             catch
             {
@@ -98,8 +101,9 @@ namespace ProjectName
         {
             try
             {
-                Course target = courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code);
-                courses.Remove(target);
+                Course target = db.Courses.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.CourseCode == code);
+                db.Courses.Remove(target);
+                db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch

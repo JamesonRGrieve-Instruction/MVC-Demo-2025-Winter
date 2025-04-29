@@ -1,0 +1,8 @@
+src/ProjectName.Test
+*.db*
+.env
+docs
+.git
+.gitignore
+.vscode
+.DS_Store

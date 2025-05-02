@@ -1,0 +1,42 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SOLUTION: src/DemoSolution.sln
+      PROJECT: src/DotNET-Console-Application
+    strategy:
+      matrix:
+        dotnet-version: ["9.0.x", "10.0.x"]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      - name: Restore dependencies
+        run: dotnet restore ${{env.SOLUTION}}
+
+      - name: Build
+        run: dotnet build --no-restore ${{env.SOLUTION}}
+
+      - name: Check Build
+        run: |
+          if [ ! -d "${{env.PROJECT}}/bin" ] && [ ! -d "${{env.PROJECT}}/publish" ]; then
+            echo "No build output directory found. Expected 'bin' or 'publish'."
+            exit 1
+          fi
+
+      - name: Test
+        run: dotnet test --no-restore ${{env.SOLUTION}}

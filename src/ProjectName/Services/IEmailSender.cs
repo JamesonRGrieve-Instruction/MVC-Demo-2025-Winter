@@ -23,7 +23,8 @@ public class EmailSender : IEmailSender
     {
         if (string.IsNullOrEmpty(Options.SendGridKey))
         {
-            throw new Exception("Null SendGridKey");
+            Console.WriteLine("Null SendGridKey");
+            // throw new Exception("Null SendGridKey");
         }
         await Execute(Options.SendGridKey, subject, message, toEmail);
     }

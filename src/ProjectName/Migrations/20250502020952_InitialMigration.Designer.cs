@@ -8,10 +8,10 @@ using ProjectName.Models;
 
 #nullable disable
 
-namespace ProjectName.Data.Migrations
+namespace ProjectName.Migrations
 {
     [DbContext(typeof(CarsContext))]
-    [Migration("20250502015903_InitialMigration")]
+    [Migration("20250502020952_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

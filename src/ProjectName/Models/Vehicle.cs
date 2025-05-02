@@ -36,32 +36,6 @@ namespace ProjectName.Models
         // public virtual Model Model { get; set; }
 
     }
-    public partial class CarsContext
-    {
-        public DbSet<Vehicle> Vehicles { get; set; }
-        partial void OnModelCreatingPartialVehicle(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Vehicle>(entity =>
-            {
-                // entity.HasData([
-                //     new Vehicle() { VIN = "4A3AL54F3XE067712", ModelID=-1, Colour="Red", ModelYear=1999 },
-                //     new Vehicle() { VIN = "JA3AN74K8XY001384", ModelID = -2, Colour = "Red", ModelYear = 1999 },
-                //     new Vehicle() { VIN = "JH4NA1153MT000743", ModelID = -3, Colour = "Silver", ModelYear = 1991 },
-                //     new Vehicle() { VIN = "JHMAP21475S008443", ModelID = -4, Colour = "Steel Blue", ModelYear = 2005 },
-                //     new Vehicle() { VIN = "JT2JA82J8S0028274", ModelID = -5, Colour = "Black", ModelYear = 1995 },
-                //     new Vehicle() { VIN = "JTDFR320320052403", ModelID = -6, Colour = "Green", ModelYear = 2002 },
-                //     new Vehicle() { VIN = "JN1RZ24A1LX002317", ModelID = -7, Colour = "Red", ModelYear = 1990 },
-                //     new Vehicle() { VIN = "-----BCNR33004655", ModelID = -8, Colour = "Purple", ModelYear = 1995 },
-                //     ]);
-                // entity.HasOne(child => child.Model)
-                //       .WithMany(parent => parent.Vehicles)
-                //       .OnDelete(DeleteBehavior.SetNull)
-                //       .HasConstraintName($"FK_{nameof(Vehicle)}_{nameof(Model)}");
-
-                // entity.HasIndex(e => e.ModelID).HasDatabaseName($"FK_{nameof(Vehicle)}_{nameof(Model)}");
-            });
-        }
-    }
 }
 
 

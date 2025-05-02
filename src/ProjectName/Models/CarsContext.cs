@@ -1,11 +1,14 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 using DotNetEnv;
 namespace ProjectName.Models
 {
-    public partial class CarsContext : DbContext
+    public partial class CarsContext : IdentityDbContext
     {
         public CarsContext() { }
         public CarsContext(DbContextOptions options) : base(options) { }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -38,18 +41,13 @@ namespace ProjectName.Models
                 }
             }
         }
-
+        public DbSet<Vehicle> Vehicles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Call other partial OnModelCreating methods
-            OnModelCreatingPartialModel(modelBuilder);
-            OnModelCreatingPartialManufacturer(modelBuilder);
-            OnModelCreatingPartialVehicle(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
 
-        partial void OnModelCreatingPartialModel(ModelBuilder modelBuilder);
-        partial void OnModelCreatingPartialManufacturer(ModelBuilder modelBuilder);
-        partial void OnModelCreatingPartialVehicle(ModelBuilder modelBuilder);
+
     }
 
 }

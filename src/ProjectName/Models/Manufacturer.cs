@@ -14,7 +14,7 @@ namespace ProjectName.Models
         public virtual IEnumerable<Model> Models { get; set; }
 
     }
-    public partial class CodeFirstContext
+    public partial class CarsContext
     {
         public DbSet<Manufacturer> Manufacturers { get; set; }
         partial void OnModelCreatingPartialManufacturer(ModelBuilder modelBuilder)

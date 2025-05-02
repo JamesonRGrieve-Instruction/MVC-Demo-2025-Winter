@@ -2,10 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
 namespace ProjectName.Models
 {
-    public partial class CodeFirstContext : DbContext
+    public partial class CarsContext : DbContext
     {
-        public CodeFirstContext() { }
-        public CodeFirstContext(DbContextOptions options) : base(options) { }
+        public CarsContext() { }
+        public CarsContext(DbContextOptions options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

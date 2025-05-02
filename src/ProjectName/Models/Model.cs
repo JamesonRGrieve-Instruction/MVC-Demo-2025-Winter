@@ -19,10 +19,10 @@ namespace ProjectName.Models
         [InverseProperty(nameof(Models.Manufacturer.Models))]
         public virtual Manufacturer Manufacturer { get; set; }
 
-        [InverseProperty(nameof(Vehicle.Model))]
-        public virtual IEnumerable<Vehicle> Vehicles { get; set; }
+        // [InverseProperty(nameof(Vehicle.Model))]
+        // public virtual IEnumerable<Vehicle> Vehicles { get; set; }
     }
-    public partial class CodeFirstContext
+    public partial class CarsContext
     {
         public DbSet<Model> Models { get; set; }
         partial void OnModelCreatingPartialModel(ModelBuilder modelBuilder)

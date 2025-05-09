@@ -7,6 +7,7 @@ public class Course
 {
     [Key]
     [Column("course_code")]
+
     public string CourseCode { get; set; }
     [Column("user_id")]
     public string UserID { get; set; }

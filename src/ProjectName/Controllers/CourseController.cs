@@ -25,6 +25,7 @@ namespace ProjectName
         // GET: Coursecontroller/Create
         public ActionResult Create()
         {
+            ViewBag.Exceptions = new List<Exception>();
             return View();
         }
 
@@ -33,9 +34,23 @@ namespace ProjectName
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind("CourseCode,Name,Description")] Course course)
         {
+            List<Exception> exceptions = new List<Exception>();
             try
             {
                 course.UserID = User.Identity.Name;
+                if (course.CourseCode.ToUpper() != course.CourseCode)
+                {
+                    exceptions.Add(new FormatException("CourseCode must be uppercase!"));
+                }
+                if (course.CourseCode.Contains(" "))
+                {
+                    exceptions.Add(new FormatException("CourseCode mustn't contain spaces!"));
+                }
+                ViewBag.Exceptions = exceptions;
+                if (exceptions.Count > 0)
+                {
+                    throw new Exception();
+                }
                 db.Courses.Add(course);
                 db.SaveChanges();
                 return RedirectToAction(nameof(Index));

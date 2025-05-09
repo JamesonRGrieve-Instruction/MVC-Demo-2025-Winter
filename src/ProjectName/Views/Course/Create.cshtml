@@ -9,6 +9,12 @@
 <form asp-action="Create">
     <div class="form-horizontal">
         <h4>Courses</h4>
+        <ul>
+            @foreach (Exception exception in ViewBag.Exceptions)
+            {
+                <li>@exception.Message</li>
+            }
+        </ul>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">

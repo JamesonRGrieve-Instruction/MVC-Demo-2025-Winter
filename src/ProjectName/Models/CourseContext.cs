@@ -58,7 +58,7 @@ namespace ProjectName.Models
                 }
                 else
                 {
-                    string dbName = Environment.GetEnvironmentVariable("DB_NAME") + ".db";
+                    string dbName = Environment.GetEnvironmentVariable("DB_NAME") ?? "app" + ".db";
                     string exactPath = Path.Combine(Directory.GetCurrentDirectory(), dbName);
                     if (!File.Exists(exactPath))
                     {

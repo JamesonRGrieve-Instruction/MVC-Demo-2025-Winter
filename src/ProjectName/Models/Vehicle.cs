@@ -12,7 +12,8 @@ namespace ProjectName.Models
         [RegularExpression("^[A-HJ-NPR-Z0-9]{17}$", ErrorMessage = "VIN must be 17 characters long and contain only uppercase letters and numbers, excluding I, O, Q.")]
         [StringLength(17)]
         public string VIN { get; set; }
-
+        [Column("user_id")]
+        public string UserID { get; set; }
         [Column("model_year", TypeName = "INTEGER")]
         [Required]
         [Range(1900, 2050, ErrorMessage = "Model year must be between 1900 and 2050.")]

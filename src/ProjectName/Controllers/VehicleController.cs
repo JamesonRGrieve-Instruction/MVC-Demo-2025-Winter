@@ -13,13 +13,13 @@ namespace ProjectName
         // GET: Vehiclecontroller
         public ActionResult Index()
         {
-            return View(db.Vehicles); //.Where(vehicle => vehicle.UserEmail == User.Identity.Name)
+            return View(db.Vehicles.Where(vehicle => vehicle.UserEmail == User.Identity.Name));
         }
 
         // GET: Vehiclecontroller/Details/5
         public ActionResult Details(string code)
         {
-            return View(db.Vehicles.ToList().Find(x => x.VIN == code)); //.Where(vehicle => vehicle.UserEmail == User.Identity.Name)
+            return View(db.Vehicles.Where(course => course.UserID == User.Identity.Name).ToList().Find(x => x.VIN == code));
         }
 
         // GET: Vehiclecontroller/Create
